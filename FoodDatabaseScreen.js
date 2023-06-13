@@ -165,7 +165,6 @@ function FoodDatabaseScreen() {
                     {selectedFoodData.serving_unit}
                   </Text>
                 )}
-
                 <Text style={styles.modalLabel}>Meal:</Text>
                 <Picker
                   selectedValue={selectedMeal}
