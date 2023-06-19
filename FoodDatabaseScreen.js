@@ -1,5 +1,5 @@
 import { Picker } from '@react-native-picker/picker';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,11 @@ import {
   ScrollView,
 } from 'react-native';
 
+import { MealPlanContext } from './MealPlanContext';
+
 function FoodDatabaseScreen() {
+  const { mealPlan, setMealPlan } = useContext(MealPlanContext);
+  const [selectedDay, setSelectedDay] = useState('Monday');
   const [searchQuery, setSearchQuery] = useState('');
   const [foodDataList, setFoodDataList] = useState([]);
   const [selectedFoodData, setSelectedFoodData] = useState(null);
@@ -22,12 +26,6 @@ function FoodDatabaseScreen() {
   const [selectedMeal, setSelectedMeal] = useState('Breakfast');
   const [quantity, setQuantity] = useState('');
   const quantityInputRef = useRef(null);
-  const [mealPlan, setMealPlan] = useState({
-    Breakfast: [],
-    Lunch: [],
-    Snack: [],
-    Dinner: [],
-  });
 
   const handleSearch = () => {
     const endpoint = 'https://trackapi.nutritionix.com/v2/search/instant';
@@ -71,7 +69,7 @@ function FoodDatabaseScreen() {
   const handleAddToMealPlan = () => {
     if (selectedFoodData) {
       const updatedMealPlan = { ...mealPlan };
-      updatedMealPlan[selectedMeal].push({
+      updatedMealPlan[selectedDay][selectedMeal].push({
         food: selectedFoodData,
         quantity: parseFloat(quantity),
       });
@@ -174,6 +172,19 @@ function FoodDatabaseScreen() {
                   <Picker.Item label="Lunch" value="Lunch" />
                   <Picker.Item label="Dinner" value="Dinner" />
                   <Picker.Item label="Snack" value="Snack" />
+                </Picker>
+                <Text style={styles.modalLabel}>Day:</Text>
+                <Picker
+                  selectedValue={selectedDay}
+                  style={styles.picker}
+                  onValueChange={(itemValue) => setSelectedDay(itemValue)}>
+                  <Picker.Item label="Monday" value="Monday" />
+                  <Picker.Item label="Tuesday" value="Tuesday" />
+                  <Picker.Item label="Wednesday" value="Wednesday" />
+                  <Picker.Item label="Thursday" value="Thursday" />
+                  <Picker.Item label="Friday" value="Friday" />
+                  <Picker.Item label="Saturday" value="Saturday" />
+                  <Picker.Item label="Sunday" value="Sunday" />
                 </Picker>
                 <TouchableOpacity style={styles.modalButton} onPress={handleAddToMealPlan}>
                   <Text style={styles.modalButtonText}>Add</Text>
