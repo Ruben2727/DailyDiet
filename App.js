@@ -12,7 +12,13 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   const [mealPlan, setMealPlan] = useState({
-    // ...
+    Monday: { Breakfast: [], Lunch: [], Dinner: [], Snack: [] },
+    Tuesday: { Breakfast: [], Lunch: [], Dinner: [], Snack: [] },
+    Wednesday: { Breakfast: [], Lunch: [], Dinner: [], Snack: [] },
+    Thursday: { Breakfast: [], Lunch: [], Dinner: [], Snack: [] },
+    Friday: { Breakfast: [], Lunch: [], Dinner: [], Snack: [] },
+    Saturday: { Breakfast: [], Lunch: [], Dinner: [], Snack: [] },
+    Sunday: { Breakfast: [], Lunch: [], Dinner: [], Snack: [] },
   });
 
   return (
