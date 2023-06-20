@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import FoodDatabaseScreen from './FoodDatabaseScreen';
 import HealthGoalsScreen from './HealthGoalsScreen';
-import HomeScreen from './HomeScreen';
 import { MealPlanContext } from './MealPlanContext';
 import MealPlanningScreen from './MealPlanningScreen';
 
