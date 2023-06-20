@@ -178,14 +178,14 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   addButton: {
-    backgroundColor: '#3f51b5',
+    backgroundColor: '#28a745',
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
     marginBottom: 8,
   },
   removeButton: {
-    backgroundColor: 'red',
+    backgroundColor: '#dc3545',
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,

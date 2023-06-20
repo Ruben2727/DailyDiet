@@ -235,7 +235,12 @@ export default function App() {
             </Modal>
           )}
         </View>
-        <Button title="Submit" onPress={handleSubmit} disabled={isSubmitDisabled} />
+        <TouchableOpacity
+          style={[styles.Button, isSubmitDisabled && styles.disabledButton]}
+          onPress={handleSubmit}
+          disabled={isSubmitDisabled}>
+          <Text style={styles.ButtonText}>Submit</Text>
+        </TouchableOpacity>
         {adjustedCaloricIntake !== '' && (
           <CaloricIntakeResult adjustedCaloricIntake={adjustedCaloricIntake} />
         )}
@@ -247,57 +252,82 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
+    padding: 16,
+    backgroundColor: '#F0F0F0',
   },
   input: {
-    width: '100%',
-    height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
-    marginBottom: 10,
-    paddingHorizontal: 10,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    marginBottom: 16,
+    fontSize: 16,
+    backgroundColor: 'white',
+    textAlign: 'center',
   },
   dropdownContainer: {
-    width: '100%',
-    marginBottom: 10,
+    marginBottom: 16,
+    textAlign: 'center',
   },
   dropdownButton: {
-    width: '100%',
-    height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    backgroundColor: 'white',
   },
   dropdownModalContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgb(255,255,255)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   dropdownItem: {
-    width: '100%',
-    height: 40,
-    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    marginBottom: 8,
+    backgroundColor: 'white',
+    textAlign: 'center',
+  },
+  Button: {
+    backgroundColor: '#28a745',
+    borderRadius: 8,
+    marginLeft: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    justifyContent: 'center',
+  },
+  disabledButton: {
+    opacity: 0.5,
+  },
+  ButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
   resultContainer: {
-    marginTop: 20,
     alignItems: 'center',
+    marginTop: 32,
+    marginBottom: 16,
+    padding: 10,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 10,
+    borderColor: '#ddd',
+    borderWidth: 1,
   },
   resultText: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#333',
+    marginBottom: 8,
+    textAlign: 'center',
   },
   caloricIntake: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 10,
+    color: '#333',
   },
 });

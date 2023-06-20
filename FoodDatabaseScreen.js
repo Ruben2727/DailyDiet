@@ -26,6 +26,7 @@ function FoodDatabaseScreen() {
   const [selectedMeal, setSelectedMeal] = useState('Breakfast');
   const [quantity, setQuantity] = useState('');
   const quantityInputRef = useRef(null);
+  const isQuantityEntered = !!quantity;
 
   const handleSearch = () => {
     const endpoint = 'https://trackapi.nutritionix.com/v2/search/instant';
@@ -135,7 +136,7 @@ function FoodDatabaseScreen() {
         )}
 
         <TouchableOpacity
-          style={styles.addToMealButton}
+          style={[styles.addToMealButton, !selectedFoodData && styles.disabledButton]}
           onPress={() => setShowModal(true)}
           disabled={!selectedFoodData}>
           <Text style={styles.addToMealButtonText}>Add to Meal Plan</Text>
@@ -186,7 +187,10 @@ function FoodDatabaseScreen() {
                   <Picker.Item label="Saturday" value="Saturday" />
                   <Picker.Item label="Sunday" value="Sunday" />
                 </Picker>
-                <TouchableOpacity style={styles.modalButton} onPress={handleAddToMealPlan}>
+                <TouchableOpacity
+                  style={[styles.modalButton, !isQuantityEntered && styles.disabledButton]}
+                  onPress={handleAddToMealPlan}
+                  disabled={!isQuantityEntered}>
                   <Text style={styles.modalButtonText}>Add</Text>
                 </TouchableOpacity>
               </View>
@@ -205,9 +209,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#F0F0F0',
   },
+
   searchContainer: {
     flexDirection: 'row',
     borderWidth: 1,
@@ -216,13 +220,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     marginBottom: 16,
+    backgroundColor: 'white',
   },
   searchInput: {
     flex: 1,
     fontSize: 16,
   },
   searchButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#28a745',
     borderRadius: 8,
     marginLeft: 8,
     paddingHorizontal: 12,
@@ -234,52 +239,23 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
-  scrollView: {
-    flex: 1,
-  },
-  foodDataContainer: {
-    alignItems: 'center',
-    marginBottom: 16,
-  },
+
   resultsText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
+    color: '#333',
   },
+
   foodItem: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#ddd',
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
     marginBottom: 8,
     alignItems: 'center',
-  },
-  foodName: {
-    fontSize: 16,
-  },
-  selectedFoodContainer: {
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  selectedFoodText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  selectedFoodName: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginBottom: 8,
-  },
-  selectedFoodCalories: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: 'gray',
-  },
-  selectedFoodQuantity: {
-    fontSize: 14,
-    color: 'gray',
+    backgroundColor: 'white',
   },
   selectedFoodImage: {
     width: 100,
@@ -287,56 +263,47 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 8,
   },
+
+  selectedFoodContainer: {
+    alignItems: 'center',
+    marginBottom: 16,
+    padding: 10,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 10,
+    borderColor: '#ddd',
+    borderWidth: 1,
+  },
+
   addToMealButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#28a745',
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
+  },
+  disabledButton: {
+    backgroundColor: '#ccc',
   },
   addToMealButtonText: {
     color: 'white',
-    fontSize: 16,
   },
-  modalContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 16,
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  modalContent: {
-    width: '100%',
-  },
-  modalLabel: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  modalQuantity: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: 'gray',
-  },
-  modalInput: {
-    borderWidth: 1,
-    borderColor: '#ccc',
+  closeModalButton: {
+    backgroundColor: '#dc3545',
     borderRadius: 8,
-    marginBottom: 16,
     paddingHorizontal: 12,
     paddingVertical: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+  closeModalButtonText: {
+    color: 'white',
     fontSize: 16,
   },
-  picker: {
-    marginBottom: 16,
-  },
   modalButton: {
-    backgroundColor: 'blue',
+    backgroundColor: '#28a745',
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
@@ -348,22 +315,52 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
-  closeModalButton: {
-    backgroundColor: 'red',
+  modalContent: {
+    backgroundColor: '#F0F0F0',
+    borderRadius: 10,
+    padding: 20,
+    width: '80%',
+    borderColor: '#ccc',
+    borderWidth: 1,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color: '#333',
+    alignSelf: 'center',
+  },
+  modalLabel: {
+    fontSize: 16,
+    color: '#333',
+    marginTop: 8,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderColor: '#ccc',
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
+    marginBottom: 16,
+    fontSize: 16,
+    backgroundColor: 'white',
+  },
+  modalQuantity: {
+    fontSize: 16,
+    color: '#333',
+  },
+  modalContainer: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  closeModalButtonText: {
-    color: 'white',
-    fontSize: 16,
+    padding: 16,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   errorText: {
     color: 'red',
     fontSize: 16,
     marginBottom: 16,
+    alignSelf: 'center',
   },
 });
 

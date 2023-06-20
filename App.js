@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import FoodDatabaseScreen from './FoodDatabaseScreen';
 import HealthGoalsScreen from './HealthGoalsScreen';
+import HomeScreen from './HomeScreen';
 import { MealPlanContext } from './MealPlanContext';
 import MealPlanningScreen from './MealPlanningScreen';
 
@@ -39,7 +40,7 @@ const App = () => {
 
               return <Icon name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: '#28a745',
             tabBarInactiveTintColor: 'gray',
             tabBarStyle: {
               display: 'flex',
